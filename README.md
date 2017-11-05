@@ -46,7 +46,20 @@ $ ng generate lib two-lib --ngmodule
 Let's generate a component in the Angular library:
 
 ```bash
-$ ng generate component myButton --app=mymodule
+$ ng generate component myButton --app=two-lib
+```
+
+We also need to export the component through an Angular module in `two-lib.module.ts`:
+
+```ts
+import { MyButtonComponent } from './my-button/my-button.component';
+
+@NgModule({
+  imports: [CommonModule],
+  declarations: [MyButtonComponent],
+  exports: [MyButtonComponent]
+})
+export class TwoLibModule {}
 ```
 
 And let's also implement some very veeee-ry smart business code in `one-lib.ts`:
@@ -59,3 +72,61 @@ export class OneLib {
   }
 }
 ```
+
+#### Develop the app
+
+Now, import the libraries with `@nx-packaged/one-lib` and `@nx-packaged/two-lib` in our application.
+
+Add the `TwoLibModule` to `app.module.ts`:
+
+```ts
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { TwoLibModule } from '@nx-packaged/two-lib';
+
+@NgModule({
+  imports: [ /* ... */ TwoLibModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+Use the `OneLib` class in `app.component.ts`:
+
+```ts
+import { Component, OnInit } from '@angular/core';
+import { OneLib } from '@nx-packaged/one-lib';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+
+  business: OneLib = new OneLib();
+}
+```
+
+Wire up all the parts in `app.component.html`:
+
+```html
+<h2>Develop Angular libraries with ng-packagr in a monorepo</h2>
+
+<p>Here is a reusable button component, implemented in a library:</p>
+<app-my-button></app-my-button>
+
+<p>Here is reusable business code from a library:</p>
+<pre><code>{{ business.foo() }}</code></pre>
+```
+
+#### Serve the app
+
+Run the app with the standard Angular CLI command:
+
+```bash
+$ ng serve
+```
+
+Open your browser at http://localhost:4200 and you will see "my-button works!" and "bar" printed on the screen.
