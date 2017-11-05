@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format": "prettier --single-quote --print-width 120 --write \"{apps,libs}/**/*.ts\"",
-    "build:libs": "ng-packagr -p libs/one-lib/package.json && ng-packagr -p libs/two-lib/package.json"
+    "build:libs": "ng-packagr -p libs/one-lib/package.json && ng-packagr -p libs/two-lib/package.json",
+    "build:app": "ng build --app one-app-from-packages --prod"
   },
   "private": true,
   "dependencies": {
