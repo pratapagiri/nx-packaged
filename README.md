@@ -130,3 +130,90 @@ $ ng serve
 ```
 
 Open your browser at http://localhost:4200 and you will see "my-button works!" and "bar" printed on the screen.
+
+#### Compile libraries in Angular Package Format
+
+Add ng-packagr to development dependencies:
+
+```bash
+$ yarn add --dev ng-packagr
+```
+
+For each library, add a `package.json` in the library folders.
+Here is the example for the first library:
+
+```json
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@nx-packaged/one-lib",
+  "version": "1.0.0",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts"
+    },
+    "dest": "@nx-packaged/one-lib"
+  }
+}
+```
+
+Add a build script to the `package.json` in the repository root folder:
+
+```json
+  "scripts": {
+    "build:libs": "ng-packagr -p libs/one-lib/package.json"
+  }
+```
+
+Now, build the library with the following command:
+
+```bash
+$ yarn build:libs
+```
+
+The build artefacts are written to `@nx-packaged/one-lib` in the repository root folder!
+
+
+#### Optional: add a 'productive' app configuration
+
+Add a configuration for Angular CLI to build the app from Angular Package Format bundles in the `@nx-packaged` folder.
+The Nx Workspace configuration (by default) builds the app from TypeScript sources in `libs/*`.
+
+This is a great way to verify that the application works with the distribution-ready artefacts of the libraries:
+
+```bash
+$ ng build --app one-app-from-packages --prod
+```
+
+However, it also forces you to re-build the library every time you change the sources!
+During development you can now use `ng serve` for hot-reloading.
+On a CI server and in build scripts, you can use the above `ng build` command to verify the libraries in Angular Package Format!
+
+Relevant configuration in `.angular-cli.json`:
+
+```json
+    {
+      "name": "one-app-from-packages",
+      "root": "apps/one-app/src",
+      "outDir": "dist/apps/one-app",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "../../../test.js",
+      "tsconfig": "../../../tsconfig.packages.json",
+      "testTsconfig": "../../../tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+```
