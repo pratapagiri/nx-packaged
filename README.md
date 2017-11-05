@@ -41,3 +41,21 @@ $ ng generate lib one-lib
 $ ng generate lib two-lib --ngmodule
 ```
 
+#### Develop libraries
+
+Let's generate a component in the Angular library:
+
+```bash
+$ ng generate component myButton --app=mymodule
+```
+
+And let's also implement some very veeee-ry smart business code in `one-lib.ts`:
+
+```ts
+export class OneLib {
+
+  public foo(): string {
+    return "bar";
+  }
+}
+```

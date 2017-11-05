@@ -1,1 +1,6 @@
-export class OneLib {}
+export class OneLib {
+
+  public foo(): string {
+    return "bar";
+  }
+}
