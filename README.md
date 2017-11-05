@@ -5,6 +5,8 @@
 Develop your libraries and applications in a monorepo.
 Build distribution-ready libraries in Angular Package Format.
 
+[![Packaging Angular Libraries](./docs/build-with-ng-packagr.gif)](http://recordit.co/Jw0inbop7f)
+
 
 ## Transcript
 
