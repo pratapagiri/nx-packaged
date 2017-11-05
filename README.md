@@ -1,44 +1,43 @@
 # NxPackaged
 
+> Demonstrates ng-packagr alongside Nx Workspace.
+
+Develop your libraries and applications in a monorepo.
+Build distribution-ready libraries in Angular Package Format.
+
+
+## Transcript
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0 using [Nrwl Nx](https://nrwl.io/nx).
 
-## Nrwl Extensions for Angular (Nx)
+The following transcript documents reproducible steps to set up this project.
 
-<a href="https://nrwl.io/nx"><img src="https://preview.ibb.co/mW6sdw/nx_logo.png"></a>
+#### Create Nx Worksapce
 
-Nx is an open source toolkit for enterprise Angular applications.
+First, [create an Nx Workspace](https://nrwl.io/nx/guide-nx-workspace).
+This repository was created with the sandbox install script:
 
-Nx is designed to help you create and build enterprise grade Angular applications. It provides an opinionated approach to application project structure and patterns.
+```bash
+$ curl -fsSL https://raw.githubusercontent.com/nrwl/nx/master/packages/install/install-next.sh | bash -s nx-packaged
+```
 
-## Quick Start & Documentation
+Alternatively, you could convert an existing Angular CLI project to Nx Workspace.
+Please see the Nx documentation how to do that.
 
-[Watch a 5-minute video on how to get started with Nx.](http://nrwl.io/nx)
+#### Create an app
 
-## Generate your first application
+For show-casing and documenting your library, [create an Angular app](https://nrwl.io/nx/guide-nx-workspace#create-an-app) in the Nx Workspace.
 
-Run `ng generate app myapp` to generate an application. When using Nx, you can create multiple applications and libraries in the same CLI workspace. Read more [here](http://nrwl.io/nx).
+```bash
+$ ng generate app one-app
+```
 
-## Development server
+#### Create a library
 
-Run `ng serve --app=myapp` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Now, [let's create one library for reusable business code and a second library for reusable Angular building blocks](https://nrwl.io/nx/guide-nx-workspace#create-a-lib):
 
-## Code scaffolding
+```bash
+$ ng generate lib one-lib
+$ ng generate lib two-lib --ngmodule
+```
 
-Run `ng generate component component-name --app=myapp` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build --app=myapp` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
