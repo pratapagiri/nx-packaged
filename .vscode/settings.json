@@ -1,0 +1,14 @@
+{
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "tsimporter.filesToExclude": [
+    "./libs/one-lib/.ng_pkg_build/**",
+    "./libs/two-lib/.ng_pkg_build/**"
+  ],
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "dist/**": true,
+    "**/.ng_pkg_build/**": true,
+    "**/coverage/**": true
+  }
+}

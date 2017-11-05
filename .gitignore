@@ -40,3 +40,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# yarn
+yarn-error.log
+
+# dist artefacts
+@nx-packaged/
+
+# ng-packagr (temporary files)
+.ng_pkg_build/
