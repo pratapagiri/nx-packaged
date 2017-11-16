@@ -6,16 +6,10 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      # - image: circleci/node:latest
       - image: angular/ngcontainer:latest
-
     working_directory: ~/repo
-
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
@@ -23,7 +17,6 @@ jobs:
           - v1-dependencies-
 
       - run: yarn install
-
       - save_cache:
           paths:
             - node_modules
@@ -36,7 +29,6 @@ jobs:
 
       # run unit tests!
       # - run: xvfb-run -a yarn ci:test
-
       # run e2e tests!
       # - run: xvfb-run -a yarn ci:e2e
 
@@ -47,19 +39,3 @@ jobs:
       - store_artifacts:
           path: ~/repo/dist/apps
           destination: apps/@nx-packaged
-
-      # run deployments for git tags
-      - deploy:
-          name: Deploy Tag to npm registry
-          command: |
-            if [ "${CIRCLE_TAG}" ]; then
-              npm pack .
-              npm publish .
-            fi
-# trigger builds for git tags
-# https://discuss.circleci.com/t/git-tag-deploys-in-2-0/9493/8
-deployment:
-  trigger_tag:
-    tag: /.*/
-    commands:
-      - echo "make tags run in 2.0"
