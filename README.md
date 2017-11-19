@@ -3,7 +3,7 @@
 > Demonstrates ng-packagr alongside Nx Workspace.
 
 Develop your libraries and applications in a monorepo.
-Build distribution-ready libraries in Angular Package Format.
+Build distribution-ready binaries in Angular Package Format.
 
 [![Packaging Angular Libraries](./docs/build-with-ng-packagr.gif)](http://recordit.co/Jw0inbop7f)
 
@@ -136,7 +136,7 @@ $ ng serve
 
 Open your browser at http://localhost:4200 and you will see "my-button works!" and "bar" printed on the screen.
 
-#### Compile libraries in Angular Package Format
+#### Compile the libraries to Angular Package Format
 
 Add ng-packagr to development dependencies:
 
@@ -169,13 +169,13 @@ Add a build script to the `package.json` in the repository root folder:
   }
 ```
 
-Now, build the library with the following command:
+Now, build the library to its binary representation with the following command:
 
 ```bash
 $ yarn build:libs
 ```
 
-The build artefacts are written to `@nx-packaged/one-lib` in the repository root folder!
+The binaries are written to `@nx-packaged/one-lib` in the repository root folder!
 
 
 #### Optional: add a 'productive' app configuration
@@ -183,7 +183,7 @@ The build artefacts are written to `@nx-packaged/one-lib` in the repository root
 Add a configuration for Angular CLI to build the app from Angular Package Format bundles in the `@nx-packaged` folder.
 The Nx Workspace configuration (by default) builds the app from TypeScript sources in `libs/*`.
 
-This is a great way to verify that the application works with the distribution-ready artefacts of the libraries:
+This is a great way to verify that the application works with the distribution-ready binaries:
 
 ```bash
 $ ng build --app one-app-from-packages --prod
@@ -191,7 +191,7 @@ $ ng build --app one-app-from-packages --prod
 
 However, it also forces you to re-build the library every time you change the sources!
 During development you can now use `ng serve` for hot-reloading.
-On a CI server and in build scripts, you can use the above `ng build` command to verify the libraries in Angular Package Format!
+On a CI server and in build scripts, you can use the above `ng build` command to verify the binaries in Angular Package Format!
 
 Relevant configuration in `.angular-cli.json`:
 
