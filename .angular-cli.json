@@ -1,7 +1,8 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
   "project": {
-    "name": "nx-packaged"
+    "name": "nx-packaged",
+    "latestMigration": "20180103-update-command-line-scripts"
   },
   "apps": [
     {
@@ -16,7 +17,7 @@
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "../../../test.js",
-      "tsconfig": "../../../tsconfig.dev.json",
+      "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "app",
       "styles": [
@@ -41,7 +42,7 @@
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "../../../test.js",
-      "tsconfig": "../../../tsconfig.packages.json",
+      "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "app",
       "styles": [
@@ -58,13 +59,15 @@
       "name": "one-lib",
       "root": "libs/one-lib/src",
       "test": "../../../test.js",
-      "appRoot": ""
+      "appRoot": "",
+      "tsconfig": "tsconfig.app.json"
     },
     {
       "name": "two-lib",
       "root": "libs/two-lib/src",
       "test": "../../../test.js",
-      "appRoot": ""
+      "appRoot": "",
+      "tsconfig": "tsconfig.app.json"
     }
   ],
   "e2e": {
@@ -74,13 +77,24 @@
   },
   "lint": [
     {
-      "project": "./tsconfig.app.json"
+      "project": "./tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "./tsconfig.spec.json"
+      "project": "./apps/one-app/src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "./tsconfig.e2e.json"
+      "project": "./apps/one-app/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "./apps/one-app/src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "./apps/one-app-from-packages/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
     }
   ],
   "test": {
