@@ -1,7 +1,7 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "../../../tsconfig.packages.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/apps/one-app",
+    "outDir": "../../../dist/out-tsc/apps/one-app-from-packages",
     "module": "es2015"
   },
   "include": [
